@@ -5,10 +5,10 @@ public class Max {
         return first > second ? first : second;
     }
     public static int max(int first, int second, int third) {
-        return max(first, second) > third ? max(first, second) : third;
+        return max(max(first, second), third);
     }
     public static int max(int first, int second, int third, int forth) {
-        return max(first, second, third) > forth ? max(first, second, third) : forth;
+        return max(max(first, second, third), forth);
     }
 
 }

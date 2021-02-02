@@ -10,7 +10,6 @@ public class StartUI {
 
         Item item = new Item();
         item.setName("Траляля");
-        item.setId(400);
         System.out.println(item);
     }
 }

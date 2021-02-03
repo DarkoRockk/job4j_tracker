@@ -18,7 +18,7 @@ public class StartUI {
                 tracker.add(item);
             }
             else if (select == 1) {
-                System.out.println("=== All tracker items ====");
+                System.out.println("=== All items ====");
                 Item[] items = tracker.findAll();
                 for (Item item : items) {
                     System.out.println(item.toString());
@@ -31,13 +31,13 @@ public class StartUI {
                 System.out.println("Enter name: ");
                 String name = scanner.nextLine();
                 Item item = new Item(name);
-                tracker.replace(id, item);
+                System.out.println(tracker.replace(id, item) ? "Successful" : "Error");
             }
             else if (select == 3) {
                 System.out.println("=== Delete item ====");
                 System.out.println("Enter id: ");
                 int id = Integer.valueOf(scanner.nextLine());
-                tracker.delete(id);
+                System.out.println(tracker.delete(id) ? "Successful" : "Error");
             }
             else if (select == 4) {
                 System.out.println("=== Find item ====");
@@ -67,7 +67,7 @@ public class StartUI {
     }
 
     private void showMenu() {
-        System.out.println("Menu.");
+        System.out.println("===== Menu =====");
         System.out.println("0. Add new Item");
         System.out.println("1. Show all items");
         System.out.println("2. Edit item");

@@ -20,7 +20,7 @@ public class FindByNameAction implements UserAction{
                 System.out.println(item.toString());
             }
         } else {
-            System.out.println("Заявки с таким именем не надены.");
+            out.println("Заявки с таким именем не надены.");
         }
         return true;
     }

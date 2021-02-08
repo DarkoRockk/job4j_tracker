@@ -8,7 +8,7 @@ import static org.hamcrest.core.IsNull.nullValue;
 public class TrackerTest {
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         Item item = new Item("test1");
         tracker.add(item);
         Item result = tracker.findById(item.getId());
@@ -16,7 +16,7 @@ public class TrackerTest {
     }
     @Test
     public void whenReplace() {
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         Item bug = new Item("Bug");
         tracker.add(bug);
         int id = bug.getId();
@@ -26,7 +26,7 @@ public class TrackerTest {
     }
     @Test
     public void whenDelete() {
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         Item bug = new Item("Bug");
         tracker.add(bug);
         int id = bug.getId();

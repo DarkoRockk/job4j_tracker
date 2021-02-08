@@ -15,7 +15,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", "Item name", "1"}
         );
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         UserAction[] actions = {
                 new CreateAction(output),
                 new ExitAction(output)
@@ -27,7 +27,7 @@ public class StartUITest {
     @Test
     public void whenReplaceItem() {
         Output output = new ConsoleOutput();
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         /* Добавим в tracker новую заявку */
         Item item = tracker.add(new Item("Replaced item"));
         /* Входные данные должны содержать ID добавленной заявки item.getId() */
@@ -46,7 +46,7 @@ public class StartUITest {
     @Test
     public void whenDeleteItem() {
         Output output = new ConsoleOutput();
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         /* Добавим в tracker новую заявку */
         Item item = tracker.add(new Item("Deleted item"));
         /* Входные данные должны содержать ID добавленной заявки item.getId() */
@@ -67,7 +67,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0"}
         );
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         UserAction[] actions = {
                 new ExitAction(out)
         };
@@ -84,7 +84,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", "test", "1", "2"}
         );
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         UserAction[] actions = {
                 new CreateAction(out),
                 new ShowAllAction(out),
@@ -114,7 +114,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", "test", "1", "1", "2"}
         );
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         UserAction[] actions = {
                 new CreateAction(out),
                 new FindAction(out),
@@ -144,7 +144,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", "test", "1", "test", "2"}
         );
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         UserAction[] actions = {
                 new CreateAction(out),
                 new FindByNameAction(out),
@@ -174,7 +174,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"7", "0"}
         );
-        Tracker tracker = new Tracker();
+        Tracker tracker = Tracker.getInstance();
         UserAction[] actions = {
                 new ExitAction(out)
         };

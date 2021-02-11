@@ -9,7 +9,7 @@ public final class Tracker {
     private final List<Item> items = new ArrayList<>();
     private int ids = 1;
 
-    private Tracker() {
+    public Tracker() {
     }
 
     public static Tracker getInstance() {

@@ -9,7 +9,8 @@ public class DiapFunc {
     public static List<Double> diapason(int start, int end, Function<Double, Double> func) {
         List<Double> result = new ArrayList<>();
         for (; start < end; start++) {
-            result.add(func);
+            Double apply = func.apply((double) start);
+            result.add(apply);
         }
         return result;
     };

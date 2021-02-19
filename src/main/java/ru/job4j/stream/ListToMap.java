@@ -10,7 +10,8 @@ public class ListToMap {
         return list.stream()
                 .collect( Collectors.toMap(
                         Student::getSurname,
-                        e -> e
-                ));
+                        e -> e,
+                        (st1, st2) -> st1.equals(st2) ? st1 : st2)
+                );
     }
 }

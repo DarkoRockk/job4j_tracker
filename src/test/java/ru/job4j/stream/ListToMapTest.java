@@ -18,6 +18,7 @@ public class ListToMapTest {
         list.add(new Student(10, "Surname1"));
         list.add(new Student(20, "Surname2"));
         list.add(new Student(30, "Surname3"));
+        list.add(new Student(30, "Surname3"));
         Map<String, Student> map = ListToMap.listToMap(list);
         Map<String, Student> expected = new HashMap<>();
         expected.put("Surname1", new Student(10, "Surname1"));

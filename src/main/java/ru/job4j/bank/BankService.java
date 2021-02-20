@@ -1,12 +1,11 @@
 package ru.job4j.bank;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * Класс работу банковского сервиса
+ *
  * @author DMITRIY SHADRIN
  * @version 1.0
  */
@@ -20,6 +19,7 @@ public class BankService {
     /**
      * Метод принимет нового ползователя и,
      * если такого не сущетсвует, добавляет его в  коллекцию
+     *
      * @param user пользователь
      */
     public void addUser(User user) {
@@ -30,8 +30,9 @@ public class BankService {
      * Метод добавляет новый счет пользователю в коллекции,
      * при условии, что этот пользователь существует. Поиск пользователя
      * ведется по его номеру паспорта.
+     *
      * @param passport номер паспорта пользователя
-     * @param account счет для добавления
+     * @param account  счет для добавления
      */
     public void addAccount(String passport, Account account) {
         User user = findByPassport(passport);
@@ -46,32 +47,32 @@ public class BankService {
     /**
      * Метод осуществляет поиск пользователя в коллекции
      * по его номеру паспорта.
+     *
      * @param passport номер паспорта пользователя
      * @return искомый пользователь
      */
     public User findByPassport(String passport) {
-        return users.keySet().stream()
+
+        Optional<User> opt = users.keySet().stream()
                 .filter(key -> key.getPassport().equals(passport))
-                .findFirst()
-                .orElse(null);
+                .findFirst();
+        return opt.orElse(null);
     }
 
     /**
      * Метод осуществляет поиск нужного счета по
      * реквизитам и номеру паспорта пользователя.
-     * @param passport номер паспорта пользователя
+     *
+     * @param passport  номер паспорта пользователя
      * @param requisite реквизиты счета
      * @return искомый счет
      */
     public Account findByRequisite(String passport, String requisite) {
         User user = findByPassport(passport);
-        if (user != null) {
-            return users.get(user). stream()
-                    .filter(acc -> acc.getRequisite().equals(requisite))
-                    .findFirst()
-                    .orElse(null);
-        }
-        return null;
+        Optional<Account> opt = users.get(user).stream()
+                .filter(acc -> acc.getRequisite().equals(requisite))
+                .findFirst();
+        return opt.orElse(null);
     }
 
     /**
@@ -79,11 +80,12 @@ public class BankService {
      * на другой, при условии, что на первом достаточное количетсво
      * денежных средств. Поиск счетов ведется по реквизитам и номеру
      * паспорта пользователя.
-     * @param srcPassport номер паспорта пользователя, переводящего деньги
-     * @param srcRequisite реквизиты счета с которого переводят деньги
-     * @param destPassport номер паспорта пользователя, принимающего деньги
+     *
+     * @param srcPassport   номер паспорта пользователя, переводящего деньги
+     * @param srcRequisite  реквизиты счета с которого переводят деньги
+     * @param destPassport  номер паспорта пользователя, принимающего деньги
      * @param destRequisite реквизиты счета принимающей стороны
-     * @param amount количество переводимых денежных средств
+     * @param amount        количество переводимых денежных средств
      * @return отет об успешности проведенной опреации true или false
      */
     public boolean transferMoney(String srcPassport, String srcRequisite,

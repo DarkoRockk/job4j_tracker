@@ -40,7 +40,8 @@ public class Analyze {
                         .stream()
                         .mapToInt(Subject::getScore)
                 .sum()))
-                .max(Comparator.comparingDouble(Tuple::getScore)).get();
+                .max(Comparator.comparingDouble(Tuple::getScore)).
+                orElse(new Tuple("Error", 0));
     }
 
     public static Tuple bestSubject(Stream<Pupil> stream) {
@@ -49,6 +50,7 @@ public class Analyze {
                 .collect(Collectors.groupingBy(Subject::getName, Collectors.summingDouble(Subject::getScore)))
                 .entrySet().stream()
                 .map(t -> new Tuple(t.getKey(), t.getValue()))
-                .max(Comparator.comparingDouble(Tuple::getScore)).get();
+                .max(Comparator.comparingDouble(Tuple::getScore))
+                .orElse(new Tuple("Error", 0));
     }
 }

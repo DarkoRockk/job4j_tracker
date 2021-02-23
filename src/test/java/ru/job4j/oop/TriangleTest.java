@@ -2,6 +2,7 @@ package ru.job4j.oop;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.closeTo;
+
 import org.junit.Test;
 
 public class TriangleTest {

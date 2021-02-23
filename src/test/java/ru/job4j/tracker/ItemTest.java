@@ -30,6 +30,7 @@ public class ItemTest {
         Collections.sort(list, new ItemReverseComparator());
         System.out.println(list);
     }
+
     @Test
     public void reverse() {
         Output output = new ConsoleOutput();

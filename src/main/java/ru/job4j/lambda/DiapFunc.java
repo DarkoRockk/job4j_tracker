@@ -13,5 +13,5 @@ public class DiapFunc {
             result.add(apply);
         }
         return result;
-    };
+    }
 }

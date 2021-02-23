@@ -4,6 +4,7 @@ import java.util.Objects;
 
 /**
  * Класс описывает модель банковского счета
+ *
  * @author DMITRIY SHADRIN
  * @version 1.0
  */
@@ -19,8 +20,9 @@ public class Account {
 
     /**
      * Конструктор класса принимает два параметра
+     *
      * @param requisite реквизиты счета
-     * @param balance баланс счета
+     * @param balance   баланс счета
      */
     public Account(String requisite, double balance) {
         this.requisite = requisite;
@@ -28,7 +30,6 @@ public class Account {
     }
 
     /**
-     *
      * @return реквизиты счета
      */
     public String getRequisite() {
@@ -37,6 +38,7 @@ public class Account {
 
     /**
      * Сеттер устанавливает
+     *
      * @param requisite реквизиты счета
      */
     public void setRequisite(String requisite) {
@@ -44,7 +46,6 @@ public class Account {
     }
 
     /**
-     *
      * @return баланс денежного счета
      */
     public double getBalance() {
@@ -53,25 +54,34 @@ public class Account {
 
     /**
      * Сеттер устанавливает
+     *
      * @param balance баланс денежного счета
      */
     public void setBalance(double balance) {
         this.balance = balance;
     }
+
     /**
      * Метод сравнения
+     *
      * @param o любой объект
      * @return результат сравнения true или false
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Account account = (Account) o;
         return Objects.equals(requisite, account.requisite);
     }
+
     /**
      * Генерация хэшкода
+     *
      * @return хэшкод
      */
     @Override

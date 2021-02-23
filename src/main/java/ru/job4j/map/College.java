@@ -13,7 +13,7 @@ public class College {
 
     public Optional<Student> findByAccount(String account) {
         Optional<Student> rsl = Optional.empty();
-        for (Student s: students.keySet()) {
+        for (Student s : students.keySet()) {
             if (account.equals(s.getAccount())) {
                 rsl = Optional.of(s);
                 break;
@@ -22,8 +22,8 @@ public class College {
         return rsl;
     }
 
-    public Optional <Subject> findBySubjectName(String account, String name) {
-        Optional <Subject> rsl = Optional.empty();
+    public Optional<Subject> findBySubjectName(String account, String name) {
+        Optional<Subject> rsl = Optional.empty();
         Optional<Student> s = findByAccount(account);
         if (s.isPresent()) {
             Set<Subject> subjects = students.get(s.get());

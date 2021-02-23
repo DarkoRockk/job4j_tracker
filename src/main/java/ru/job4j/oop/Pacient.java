@@ -1,8 +1,8 @@
 package ru.job4j.oop;
 
 public class Pacient {
-    String name;
-    String symptomes;
+    private String name;
+    private String symptomes;
 
     public String getName() {
         return name;

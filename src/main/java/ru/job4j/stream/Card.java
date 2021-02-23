@@ -14,7 +14,7 @@ public class Card {
     public static void main(String[] args) {
         Stream.of(Value.values())
                 .flatMap(value -> Stream.of(Suit.values())
-                .map(card -> value +" of "+ card))
+                        .map(card -> value + " of " + card))
                 .forEach(System.out::println);
     }
 }

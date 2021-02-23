@@ -2,7 +2,7 @@ package ru.job4j.tracker;
 
 import java.util.List;
 
-public class ShowAllAction implements UserAction{
+public class ShowAllAction implements UserAction {
     private final Output out;
 
     public ShowAllAction(Output out) {

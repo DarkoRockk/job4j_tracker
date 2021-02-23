@@ -2,8 +2,8 @@ package ru.job4j.oop;
 
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
+import static org.junit.Assert.*;
 
 public class PointTest {
 
@@ -30,6 +30,7 @@ public class PointTest {
         double out = point1.distance(point2);
         assertEquals(4, out, 0.01);
     }
+
     @Test
     public void when000to300then3() {
         Point point1 = new Point(0, 0, 0);
@@ -37,6 +38,7 @@ public class PointTest {
         double out = point1.distance(point2);
         assertEquals(3, out, 0.01);
     }
+
     @Test
     public void when040to000then4() {
         Point point1 = new Point(0, 4, 0);

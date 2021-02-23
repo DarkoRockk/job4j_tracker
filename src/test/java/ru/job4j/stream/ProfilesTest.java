@@ -20,7 +20,7 @@ public class ProfilesTest {
         )
         );
         List<Address> testList = Profiles.collect(list);
-        List<Address> expeced = new ArrayList (Arrays.asList(
+        List<Address> expeced = new ArrayList(Arrays.asList(
                 new Address("Moscow"),
                 new Address("Saint-Petersburg")
         ));

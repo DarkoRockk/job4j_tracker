@@ -11,15 +11,15 @@ public class Cat {
 
     @Override
     public String toString() {
-        return "Cat{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", gender='" + gender + '\'' +
-                ", color='" + color + '\'' +
-                ", lovelyFood='" + lovelyFood + '\'' +
-                ", ownerName='" + ownerName + '\'' +
-                ", ownerSurname='" + ownerSurname + '\'' +
-                '}';
+        return "Cat{"
+                + "name='" + name + '\''
+                + ", age=" + age
+                + ", gender='" + gender + '\''
+                + ", color='" + color + '\''
+                + ", lovelyFood='" + lovelyFood + '\''
+                + ", ownerName='" + ownerName + '\''
+                + ", ownerSurname='" + ownerSurname + '\''
+                + '}';
     }
 
     static class Builder {

@@ -8,7 +8,9 @@ public class College {
         Student student = new Student();
         student.setName("Shadrin Dmitry Andreevich");
         student.setGroup("1-А");
-        student.setAdmission(LocalDate.of(2017, 6,12));
-        System.out.println(student.getName() + " " + student.getGroup() + " " + student.getAdmission());
+        student.setAdmission(LocalDate.of(2017, 6, 12));
+        System.out.println(student.getName()
+                + " " + student.getGroup()
+                + " " + student.getAdmission());
     }
 }

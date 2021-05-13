@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ public class StartUI {
         this.out = out;
     }
 
-    public void init(Input input, Tracker tracker, List<UserAction> actions) {
+    public void init(Input input, Tracker tracker, List<UserAction> actions) throws IOException {
         boolean run = true;
         while (run) {
             this.showMenu(actions);
@@ -32,7 +33,7 @@ public class StartUI {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Output output = new ConsoleOutput();
         Input input = new ValidateInput(output, new ConsoleInput());
         Tracker tracker = Tracker.getInstance();

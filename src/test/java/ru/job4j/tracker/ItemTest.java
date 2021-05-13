@@ -3,6 +3,7 @@ package ru.job4j.tracker;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -13,7 +14,7 @@ import static org.junit.Assert.*;
 
 public class ItemTest {
     @Test
-    public void sort() {
+    public void sort() throws IOException {
         Output output = new ConsoleOutput();
         Input in = new StubInput(
                 new String[]{"0", "Item1", "0", "Item2", "0", "Item3", "1"}
@@ -32,7 +33,7 @@ public class ItemTest {
     }
 
     @Test
-    public void reverse() {
+    public void reverse() throws IOException {
         Output output = new ConsoleOutput();
         Input in = new StubInput(
                 new String[]{"0", "Item1", "0", "Item2", "0", "Item3", "1"}

@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.io.IOException;
+
 public class CreateAction implements UserAction {
     private final Output out;
 
@@ -13,7 +15,7 @@ public class CreateAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Tracker tracker) throws IOException {
         String name = input.askStr("Enter name: ");
         Item item = new Item(name);
         tracker.add(item);

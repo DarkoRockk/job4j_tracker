@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,9 +22,12 @@ public final class Tracker {
         return instance;
     }
 
-    public Item add(Item item) {
+    public Item add(Item item) throws IOException {
         item.setId(ids++);
         items.add(item);
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter("./db/insert.sql", true))) {
+            writer.write(String.format("insert into items(name) values ('%s');\n", item.getName()));
+        }
         return item;
     }
 

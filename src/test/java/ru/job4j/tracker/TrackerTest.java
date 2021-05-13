@@ -2,13 +2,15 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.IsNull.nullValue;
 
 public class TrackerTest {
     @Test
-    public void whenAddNewItemThenTrackerHasSameItem() {
+    public void whenAddNewItemThenTrackerHasSameItem() throws IOException {
         Tracker tracker = Tracker.getInstance();
         Item item = new Item("test1");
         tracker.add(item);
@@ -17,7 +19,7 @@ public class TrackerTest {
     }
 
     @Test
-    public void whenReplace() {
+    public void whenReplace() throws IOException {
         Tracker tracker = Tracker.getInstance();
         Item bug = new Item("Bug");
         tracker.add(bug);
@@ -28,7 +30,7 @@ public class TrackerTest {
     }
 
     @Test
-    public void whenDelete() {
+    public void whenDelete() throws IOException {
         Tracker tracker = Tracker.getInstance();
         Item bug = new Item("Bug");
         tracker.add(bug);

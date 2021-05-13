@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import static org.junit.Assert.assertThat;
 public class StartUITest {
 
     @Test
-    public void whenCreateItem() {
+    public void whenCreateItem() throws IOException {
         Output output = new ConsoleOutput();
         Input in = new StubInput(
                 new String[]{"0", "Item name", "1"}
@@ -28,7 +29,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenReplaceItem() {
+    public void whenReplaceItem() throws IOException {
         Output output = new ConsoleOutput();
         Tracker tracker = new Tracker();
         /* Добавим в tracker новую заявку */
@@ -46,7 +47,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenDeleteItem() {
+    public void whenDeleteItem() throws IOException {
         Output output = new ConsoleOutput();
         Tracker tracker = new Tracker();
         /* Добавим в tracker новую заявку */
@@ -63,7 +64,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenExit() {
+    public void whenExit() throws IOException {
         Output out = new StubOutput();
         Input in = new StubInput(
                 new String[]{"0"}
@@ -79,7 +80,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenShowAll() {
+    public void whenShowAll() throws IOException {
         Output out = new StubOutput();
         Input in = new StubInput(
                 new String[]{"0", "test", "1", "2"}
@@ -108,7 +109,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenFindById() {
+    public void whenFindById() throws IOException {
         Output out = new StubOutput();
         Input in = new StubInput(
                 new String[]{"0", "test", "1", "1", "2"}
@@ -137,7 +138,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenFindByName() {
+    public void whenFindByName() throws IOException {
         Output out = new StubOutput();
         Input in = new StubInput(
                 new String[]{"0", "test", "1", "test", "2"}
@@ -166,7 +167,7 @@ public class StartUITest {
     }
 
     @Test
-    public void whenInvalidExit() {
+    public void whenInvalidExit() throws IOException {
         Output out = new StubOutput();
         Input in = new StubInput(
                 new String[]{"7", "0"}

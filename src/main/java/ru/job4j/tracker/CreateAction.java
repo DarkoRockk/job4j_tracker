@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class CreateAction implements UserAction {
     private final Output out;
@@ -15,10 +16,10 @@ public class CreateAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) throws IOException {
+    public boolean execute(Input input, Store memTracker) throws IOException, SQLException {
         String name = input.askStr("Enter name: ");
         Item item = new Item(name);
-        tracker.add(item);
+        memTracker.add(item);
         return true;
     }
 }

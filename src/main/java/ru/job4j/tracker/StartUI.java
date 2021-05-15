@@ -1,7 +1,7 @@
 package ru.job4j.tracker;
 
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class StartUI {
         this.out = out;
     }
 
-    public void init(Input input, Tracker tracker, List<UserAction> actions) throws IOException {
+    public void init(Input input, Store tracker, List<UserAction> actions) throws IOException, SQLException {
         boolean run = true;
         while (run) {
             this.showMenu(actions);
@@ -33,18 +33,22 @@ public class StartUI {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         Output output = new ConsoleOutput();
         Input input = new ValidateInput(output, new ConsoleInput());
-        Tracker tracker = Tracker.getInstance();
-        List<UserAction> actions = new ArrayList<>();
-        actions.add(new CreateAction(output));
-        actions.add(new ShowAllAction(output));
-        actions.add(new ReplaceAction(output));
-        actions.add(new DeleteAction(output));
-        actions.add(new FindAction(output));
-        actions.add(new FindByNameAction(output));
-        actions.add(new ExitAction(output));
-        new StartUI(output).init(input, tracker, actions);
+        try (Store tracker = new SqlTracker()) {
+            tracker.init();
+            List<UserAction> actions = new ArrayList<>();
+            actions.add(new CreateAction(output));
+            actions.add(new ShowAllAction(output));
+            actions.add(new ReplaceAction(output));
+            actions.add(new DeleteAction(output));
+            actions.add(new FindAction(output));
+            actions.add(new FindByNameAction(output));
+            actions.add(new ExitAction(output));
+            new StartUI(output).init(input, tracker, actions);
+        }
+
+
     }
 }

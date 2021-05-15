@@ -4,20 +4,19 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public final class Tracker {
-    private static Tracker instance = null;
+public final class MemTracker {
+    private static MemTracker instance = null;
     private final List<Item> items = new ArrayList<>();
     private int ids = 1;
 
-    public Tracker() {
+    public MemTracker() {
     }
 
-    public static Tracker getInstance() {
+    public static MemTracker getInstance() {
         if (instance == null) {
-            instance = new Tracker();
+            instance = new MemTracker();
         }
         return instance;
     }

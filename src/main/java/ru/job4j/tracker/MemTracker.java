@@ -24,9 +24,6 @@ public final class MemTracker {
     public Item add(Item item) throws IOException {
         item.setId(ids++);
         items.add(item);
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("./db/insert.sql", true))) {
-            writer.write(String.format("insert into items(name) values ('%s');\n", item.getName()));
-        }
         return item;
     }
 

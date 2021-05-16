@@ -16,10 +16,14 @@ public class CreateAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Store memTracker) throws IOException, SQLException {
+    public boolean execute(Input input, Store memTracker) throws IOException {
         String name = input.askStr("Enter name: ");
         Item item = new Item(name);
-        memTracker.add(item);
+        try {
+            memTracker.add(item);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return true;
     }
 }

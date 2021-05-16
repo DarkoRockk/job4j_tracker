@@ -15,11 +15,15 @@ public class ReplaceAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Store memTracker) throws SQLException {
+    public boolean execute(Input input, Store memTracker) {
         int id = Integer.valueOf(input.askStr("Enter id:"));
         String name = input.askStr("Enter name:");
         Item item = new Item(name);
-        out.println(memTracker.replace(id, item) ? "Successful" : "Error");
+        try {
+            out.println(memTracker.replace(id, item) ? "Successful" : "Error");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return true;
     }
 }

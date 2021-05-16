@@ -34,7 +34,7 @@ public class SqlTracker implements Store {
     }
 
     @Override
-    public Item add(Item item) throws SQLException {
+    public Item add(Item item) {
         try (PreparedStatement statement = cn.prepareStatement(
                 "insert into items(name) values (?);", Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, item.getName());
@@ -44,35 +44,41 @@ public class SqlTracker implements Store {
                     item.setId(generatedKeys.getInt(1));
                 }
             }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return item;
     }
 
     @Override
-    public boolean replace(int id, Item item) throws SQLException {
-        boolean rsl;
+    public boolean replace(int id, Item item) {
+        boolean rsl = false;
         try (PreparedStatement statement = cn.prepareStatement(
                 "update items set name = ? where id = ?")) {
             statement.setString(1, item.getName());
             statement.setInt(2, id);
             rsl = statement.executeUpdate() > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return rsl;
     }
 
     @Override
-    public boolean delete(int id) throws SQLException {
-        boolean rsl;
+    public boolean delete(int id) {
+        boolean rsl = false;
         try (PreparedStatement statement = cn.prepareStatement(
                 "delete from items where id = ?")) {
             statement.setInt(1, id);
             rsl = statement.executeUpdate() > 0;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return rsl;
     }
 
     @Override
-    public List<Item> findAll() throws SQLException {
+    public List<Item> findAll() {
         List<Item> items = new ArrayList<>();
         try (PreparedStatement statement = cn.prepareStatement(
                 "select * from items")) {
@@ -83,12 +89,14 @@ public class SqlTracker implements Store {
                     items.add(item);
                 }
             }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return items;
     }
 
     @Override
-    public List<Item> findByName(String key) throws SQLException {
+    public List<Item> findByName(String key) {
         List<Item> items = new ArrayList<>();
         try (PreparedStatement statement = cn.prepareStatement(
                 "select * from items where name = ?")) {
@@ -100,12 +108,14 @@ public class SqlTracker implements Store {
                     items.add(item);
                 }
             }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return items;
     }
 
     @Override
-    public Item findById(int id) throws SQLException {
+    public Item findById(int id) {
         Item item = null;
         try (PreparedStatement statement = cn.prepareStatement(
                 "select * from items where id = ?")) {
@@ -116,6 +126,8 @@ public class SqlTracker implements Store {
                     item.setId(resultSet.getInt("id"));
                 }
             }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
         return item;
     }

@@ -16,8 +16,13 @@ public class ShowAllAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Store memTracker) throws SQLException {
-        List<Item> items = memTracker.findAll();
+    public boolean execute(Input input, Store memTracker) {
+        List<Item> items = null;
+        try {
+            items = memTracker.findAll();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         for (Item item : items) {
             out.println(item.toString());
         }

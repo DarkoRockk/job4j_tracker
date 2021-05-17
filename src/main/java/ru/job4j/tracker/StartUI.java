@@ -12,7 +12,8 @@ public class StartUI {
         this.out = out;
     }
 
-    public void init(Input input, Store tracker, List<UserAction> actions) throws IOException, SQLException {
+    public void init(Input input, Store tracker, List<UserAction> actions)
+            throws IOException, SQLException {
         boolean run = true;
         while (run) {
             this.showMenu(actions);
@@ -48,7 +49,5 @@ public class StartUI {
             actions.add(new ExitAction(output));
             new StartUI(output).init(input, tracker, actions);
         }
-
-
     }
 }

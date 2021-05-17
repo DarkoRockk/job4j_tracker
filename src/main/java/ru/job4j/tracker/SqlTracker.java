@@ -11,8 +11,16 @@ import java.sql.*;
 public class SqlTracker implements Store {
     private Connection cn;
 
+    public SqlTracker() {
+    }
+
+    public SqlTracker(Connection cn) {
+        this.cn = cn;
+    }
+
     public void init() {
-        try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("add.properties")) {
+        try (InputStream in = SqlTracker.class
+                .getClassLoader().getResourceAsStream("app.properties")) {
             Properties config = new Properties();
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
@@ -40,7 +48,7 @@ public class SqlTracker implements Store {
             statement.setString(1, item.getName());
             statement.execute();
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
-                if(generatedKeys.next()) {
+                if (generatedKeys.next()) {
                     item.setId(generatedKeys.getInt(1));
                 }
             }
@@ -82,9 +90,9 @@ public class SqlTracker implements Store {
         List<Item> items = new ArrayList<>();
         try (PreparedStatement statement = cn.prepareStatement(
                 "select * from items")) {
-            try(ResultSet resultSet = statement.executeQuery()) {
+            try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    Item item = new Item (resultSet.getString("name"));
+                    Item item = new Item(resultSet.getString("name"));
                     item.setId(resultSet.getInt("id"));
                     items.add(item);
                 }
@@ -101,9 +109,9 @@ public class SqlTracker implements Store {
         try (PreparedStatement statement = cn.prepareStatement(
                 "select * from items where name = ?")) {
             statement.setString(1, key);
-            try(ResultSet resultSet = statement.executeQuery()) {
+            try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    Item item = new Item (resultSet.getString("name"));
+                    Item item = new Item(resultSet.getString("name"));
                     item.setId(resultSet.getInt("id"));
                     items.add(item);
                 }
@@ -120,9 +128,9 @@ public class SqlTracker implements Store {
         try (PreparedStatement statement = cn.prepareStatement(
                 "select * from items where id = ?")) {
             statement.setInt(1, id);
-            try(ResultSet resultSet = statement.executeQuery()) {
+            try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    item = new Item (resultSet.getString("name"));
+                    item = new Item(resultSet.getString("name"));
                     item.setId(resultSet.getInt("id"));
                 }
             }

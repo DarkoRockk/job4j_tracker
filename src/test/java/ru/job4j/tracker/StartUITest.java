@@ -3,9 +3,13 @@ package ru.job4j.tracker;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
@@ -13,24 +17,41 @@ import static org.junit.Assert.assertThat;
 
 public class StartUITest {
 
+    public Connection init() {
+        try (InputStream in = SqlTracker.class.getClassLoader()
+                .getResourceAsStream("app.properties")) {
+            Properties config = new Properties();
+            config.load(in);
+            Class.forName(config.getProperty("driver-class-name"));
+            return DriverManager.getConnection(
+                    config.getProperty("url"),
+                    config.getProperty("username"),
+                    config.getProperty("password")
+            );
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
     @Test
     public void whenCreateItem() throws IOException, SQLException {
         Output output = new ConsoleOutput();
         Input in = new StubInput(
                 new String[]{"0", "Item name", "1"}
         );
-        Store memTracker = new SqlTracker();
+        Store memTracker = new SqlTracker(ConnectionRollback.create(this.init()));
         List<UserAction> actions = new ArrayList<>();
         actions.add(new CreateAction(output));
         actions.add(new ExitAction(output));
         new StartUI(output).init(in, memTracker, actions);
-        assertThat(memTracker.findAll().get(0).getName(), is("Item name"));
+        List<Item> rsl = memTracker.findAll();
+        assertThat(rsl.get(rsl.size() - 1).getName(), is("Item name"));
     }
 
     @Test
     public void whenReplaceItem() throws IOException, SQLException {
         Output output = new ConsoleOutput();
-        Store memTracker = new SqlTracker();
+        Store memTracker = new SqlTracker(ConnectionRollback.create(this.init()));
         /* Добавим в tracker новую заявку */
         Item item = memTracker.add(new Item("Replaced item"));
         /* Входные данные должны содержать ID добавленной заявки item.getId() */
@@ -48,7 +69,7 @@ public class StartUITest {
     @Test
     public void whenDeleteItem() throws IOException, SQLException {
         Output output = new ConsoleOutput();
-        Store memTracker = new SqlTracker();
+        Store memTracker = new SqlTracker(ConnectionRollback.create(this.init()));
         /* Добавим в tracker новую заявку */
         Item item = memTracker.add(new Item("Deleted item"));
         /* Входные данные должны содержать ID добавленной заявки item.getId() */
@@ -68,7 +89,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0"}
         );
-        Store memTracker = new SqlTracker();
+        Store memTracker = new SqlTracker(ConnectionRollback.create(this.init()));
         List<UserAction> actions = new ArrayList<>();
         actions.add(new ExitAction(out));
         new StartUI(out).init(in, memTracker, actions);
@@ -84,7 +105,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", "test", "1", "2"}
         );
-        Store memTracker = new SqlTracker();
+        Store memTracker = new SqlTracker(ConnectionRollback.create(this.init()));
         List<UserAction> actions = new ArrayList<>();
         actions.add(new CreateAction(out));
         actions.add(new ShowAllAction(out));
@@ -113,7 +134,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", "test", "1", "1", "2"}
         );
-        Store memTracker = new SqlTracker();
+        Store memTracker = new SqlTracker(ConnectionRollback.create(this.init()));
         List<UserAction> actions = new ArrayList<>();
         actions.add(new CreateAction(out));
         actions.add(new FindAction(out));
@@ -142,7 +163,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"0", "test", "1", "test", "2"}
         );
-        Store memTracker = new SqlTracker();
+        Store memTracker = new SqlTracker(ConnectionRollback.create(this.init()));
         List<UserAction> actions = new ArrayList<>();
         actions.add(new CreateAction(out));
         actions.add(new FindByNameAction(out));
@@ -171,7 +192,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[]{"7", "0"}
         );
-        Store memTracker = new SqlTracker();
+        Store memTracker = new SqlTracker(ConnectionRollback.create(this.init()));
         List<UserAction> actions = new ArrayList<>();
         actions.add(new ExitAction(out));
         new StartUI(out).init(in, memTracker, actions);

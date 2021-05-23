@@ -19,11 +19,7 @@ public class ReplaceAction implements UserAction {
         int id = Integer.valueOf(input.askStr("Enter id:"));
         String name = input.askStr("Enter name:");
         Item item = new Item(name);
-        try {
-            out.println(memTracker.replace(id, item) ? "Successful" : "Error");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        out.println(memTracker.replace(id, item) ? "Successful" : "Error");
         return true;
     }
 }

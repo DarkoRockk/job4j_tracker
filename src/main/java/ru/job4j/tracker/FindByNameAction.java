@@ -19,11 +19,7 @@ public class FindByNameAction implements UserAction {
     public boolean execute(Input input, Store memTracker) {
         String name = input.askStr("Enter name:");
         List<Item> items = null;
-        try {
-            items = memTracker.findByName(name);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        items = memTracker.findByName(name);
         if (items.size() > 0) {
             for (Item item : items) {
                 out.println(item.toString());

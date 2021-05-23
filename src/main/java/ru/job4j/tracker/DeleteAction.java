@@ -17,11 +17,7 @@ public class DeleteAction implements UserAction {
     @Override
     public boolean execute(Input input, Store memTracker) {
         int id = Integer.valueOf(input.askStr("Enter id:"));
-        try {
-            out.println(memTracker.delete(id) ? "Successful" : "Error");
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        out.println(memTracker.delete(id) ? "Successful" : "Error");
         return true;
     }
 }

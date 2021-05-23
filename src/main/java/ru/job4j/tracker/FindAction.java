@@ -18,11 +18,7 @@ public class FindAction implements UserAction {
     public boolean execute(Input input, Store memTracker) {
         int id = Integer.valueOf(input.askStr("Enter id:"));
         Item item = null;
-        try {
-            item = memTracker.findById(id);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        item = memTracker.findById(id);
         out.println(item != null ? item.toString() : "Заявка с таким id не найдена.");
         return true;
     }

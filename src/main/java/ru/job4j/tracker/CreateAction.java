@@ -19,11 +19,7 @@ public class CreateAction implements UserAction {
     public boolean execute(Input input, Store memTracker) throws IOException {
         String name = input.askStr("Enter name: ");
         Item item = new Item(name);
-        try {
-            memTracker.add(item);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        memTracker.add(item);
         return true;
     }
 }

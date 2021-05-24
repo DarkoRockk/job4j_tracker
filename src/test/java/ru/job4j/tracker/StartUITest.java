@@ -32,6 +32,27 @@ public class StartUITest {
             throw new IllegalStateException(e);
         }
     }
+    @Test
+    public void findByNameItem() throws Exception {
+        try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
+            tracker.add(new Item("name"));
+            tracker.add(new Item("name"));
+            assertThat(tracker.findByName("name").size(), is(2));
+
+        }
+    }
+
+    @Test
+    public void findAllItems() throws Exception {
+        try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
+            int beforeSize = tracker.findAll().size();
+            tracker.add(new Item("name1"));
+            tracker.add(new Item("name2"));
+            int rsl = tracker.findAll().size() - beforeSize;
+            assertThat(rsl, is(2));
+
+        }
+    }
 
     @Test
     public void createItem() throws Exception {
